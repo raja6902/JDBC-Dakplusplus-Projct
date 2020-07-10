@@ -20,8 +20,8 @@ public class EmployeeDAO {
 
     }
 
-    public static void post(String first_name, String sir_name, String telephnone_number, String telephone_number_ICE, Date birth_date, double salary_per_month) {
-        java.sql.Date sqbirth_date = java.sql.Date.valueOf(String.valueOf(birth_date));
+    public static void post(String first_name, String sir_name, String telephone_number, String telephone_number_ICE, Date birth_date, double salary_per_month) {
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
