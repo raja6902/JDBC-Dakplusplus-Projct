@@ -27,9 +27,7 @@ public class EmployeeDAO {
 
         try {
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement posted = conn.prepareStatement("INSERT INTO employee (first_name, sir_name, " +
-                    "telephone_number, " +
-                    "telephone_number_ICE, birth_date, salary_per_month) VALUES( ?,?,?,?,?,?");
+            PreparedStatement posted = conn.prepareStatement("INSERT INTO employee (first_name, sir_name, telephone_number,telephone_number_ICE, birth_date, salary_per_month) VALUES( ?,?,?,?,?,?");
             preparedStatement.setString(1, "first_name");
             preparedStatement.setString(2, "sir_name");
             preparedStatement.setString(3,"telephone_number");
@@ -123,9 +121,10 @@ public class EmployeeDAO {
     }
 
     public List<Employee> getAge() throws SQLException, ClassNotFoundException {
+        String string = "SELECT * ,floor(DATEDIFF (NOW(), birth_date)/365) AS age FROM employee";
         Connection conn = ConnectionFactory.getConnection();
         Statement statement = conn.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * ,floor(DATEDIFF (NOW(), birth_date)/365) AS age FROM employee");
+        ResultSet rs = statement.executeQuery(string);
         return parseEmployee(rs);
 
     }

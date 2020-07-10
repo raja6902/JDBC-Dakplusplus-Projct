@@ -13,7 +13,7 @@ public class DakPlus_ProjectDAO {
     public List<DakPlus_Project> incompleteProject() throws SQLException, ClassNotFoundException {
         Connection conn = ConnectionFactory.getConnection();
         Statement statement = conn.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * FROM DakPlus_Project WHERE END_DATE > NOW()");
+        ResultSet rs = statement.executeQuery("SELECT * FROM DakPlus_Project");
         return parseDP_project(rs);
     }
 

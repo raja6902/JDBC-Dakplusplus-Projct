@@ -97,6 +97,7 @@ public class Main {
             }
             if (subChoice == 5) {
                 Scanner scan = new Scanner(System.in);
+
                 System.out.println("Id of the employee");
                 int id = scan.nextInt();
                 System.out.println("Please enter the first name of the employee");
@@ -140,70 +141,73 @@ public class Main {
 
             }
         }
-           if(mainChoice==2){
-               DakPlus_ProjectService dps = new DakPlus_ProjectService();
-               if(subChoice==1){
-                   List<DakPlus_Project> dakplus = new ArrayList<>();
-                   try{
-                       dakplus= dps.incompleteProject();
-                       dakplus.forEach(System.out::println);
-                   }catch(SQLException ignored){
-                       System.out.println("some thing went wrong with data base");
-                   }
-               }
-           }
 
-           }
-
-
-            private static void showMenu () {
-                System.out.println("0. Exit");
-                System.out.println("1. employee");
-                System.out.println("2. DakPlus_Project");
-                System.out.println("3. CompletedProjects");
-            }
-
-            private static void showSubMenu(int choice) {
-                if (choice == 1) {
-                    System.out.println("0. Exit");
-                    System.out.println("1. Show all employee");
-                    System.out.println("2. Showing employee with First or Last name");
-                    System.out.println("3. deleting employee from list ");
-                    System.out.println("4. Adding new employee");
-                    System.out.println("5. Updating the Employee list");
-                    System.out.println("6 Wrong phone number listed");
-                    System.out.println("7. employee's birthday with in  next 7 days");
-                    System.out.println("8. Showing Employee's Age");
-
-                }
-                if(choice == 2){
-                    System.out.println("10. Running Projects which has not been completed");
-                    System.out.println("2.Projects starting today");
-                }
-            }
-
-
-            private static int requestIntInput ( int lower, int upper){
-                Scanner scanner = new Scanner(System.in);
-                int input = -1;
-                do {
+            if (mainChoice == 2) {
+                DakPlus_ProjectService dps = new DakPlus_ProjectService();
+                if (subChoice == 1) {
+                    List<DakPlus_Project> dakplus = new ArrayList<>();
                     try {
-                        System.out.println("Choose from Menu: ");
-                        input = scanner.nextInt();
-                    } catch (Exception e) {
-                        input = -1;
+                        dakplus = dps.incompleteProject();
+                        dakplus.forEach(System.out::println);
+                    } catch (SQLException ignored) {
+                        System.out.println("some thing went wrong with data base");
                     }
-                    scanner.nextLine();
-                    if (input < lower || input > upper)
-                        System.out.println("this is not valid number");
                 }
-                while (input < lower || input > upper);
-                return input;
             }
-            private static void printResult (List < String > result) {
-                result.forEach(System.out::println);
+
+        }
+
+
+        private static void showMenu () {
+            System.out.println("0. Exit");
+            System.out.println("1. employee");
+            System.out.println("2. DakPlus_Project");
+            System.out.println("3. CompletedProjects");
+        }
+
+        private static void showSubMenu ( int choice){
+            if (choice == 1) {
+                System.out.println("0. Exit");
+                System.out.println("1. Show all employee");
+                System.out.println("2. Showing employee with First or Last name");
+                System.out.println("3. deleting employee from list ");
+                System.out.println("4. Adding new employee");
+                System.out.println("5. Updating the Employee list");
+                System.out.println("6 Wrong phone number listed");
+                System.out.println("7. employee's birthday with in  next 7 days");
+                System.out.println("8. Showing Employee's Age");
+
+            }
+            if (choice == 2) {
+                System.out.println("1. Running Projects which has not been completed");
+                System.out.println("2.Projects starting today");
             }
         }
+
+
+        private static int requestIntInput ( int lower, int upper){
+            Scanner scanner = new Scanner(System.in);
+            int input = -1;
+            do {
+                try {
+                    System.out.println("Choose from Menu: ");
+                    input = scanner.nextInt();
+                } catch (Exception e) {
+                    input = -1;
+                }
+                scanner.nextLine();
+                if (input < lower || input > upper)
+                    System.out.println("this is not valid number");
+            }
+            while (input < lower || input > upper);
+            return input;
+        }
+
+
+        private static void printResult (List < String > result) {
+            result.forEach(System.out::println);
+        }
+    }
 
 
 

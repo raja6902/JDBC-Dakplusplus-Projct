@@ -2,6 +2,7 @@ package be.raja.model;
 
 import java.util.Date;
 
+
 public class Employee {
     private int id;
     private String first_name;
