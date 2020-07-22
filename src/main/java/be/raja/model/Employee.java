@@ -1,7 +1,7 @@
 package be.raja.model;
 
-import java.util.Date;
 
+import java.sql.Date;
 
 public class Employee {
     private int id;
@@ -11,6 +11,9 @@ public class Employee {
     private String telephone_number_ICE;
     private Date birth_date;
     private double salary_per_month;
+
+    public Employee() {
+    }
 
     public int getId() {
         return id;

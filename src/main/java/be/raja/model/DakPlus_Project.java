@@ -1,7 +1,10 @@
 package be.raja.model;
 
 
-import java.util.Date;
+
+
+import java.sql.Date;
+
 
 public class DakPlus_Project {
     private int id;
@@ -9,6 +12,9 @@ public class DakPlus_Project {
     private String description;
     private double price;
     private Date end_date;
+
+    public DakPlus_Project() {
+    }
 
     public int getId() {
         return id;
@@ -18,11 +24,11 @@ public class DakPlus_Project {
         this.id = id;
     }
 
-    public Date getStart_date(Date start_date) {
+    public Date getStart_date() {
         return this.start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(java.sql.Date start_date) {
         this.start_date = start_date;
     }
 
@@ -46,7 +52,7 @@ public class DakPlus_Project {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(java.sql.Date end_date) {
         this.end_date = end_date;
     }
 
@@ -60,4 +66,7 @@ public class DakPlus_Project {
                 ", end_date=" + end_date +
                 '}';
     }
-}
+
+
+    }
+

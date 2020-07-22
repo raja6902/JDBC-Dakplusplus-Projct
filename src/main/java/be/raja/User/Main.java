@@ -1,12 +1,16 @@
-package be.raja;
+package be.raja.User;
 
+import be.raja.data.ConnectionFactory;
+import be.raja.data.DakPlus_ProjectDAO;
 import be.raja.model.DakPlus_Project;
 import be.raja.model.Employee;
 import be.raja.services.DakPlus_ProjectService;
 import be.raja.services.EmployeeService;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +18,7 @@ import java.util.Scanner;
 public class Main {
 
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, ParseException {
         Scanner scan = new Scanner(System.in);
 
         int mainChoice;
@@ -27,24 +31,23 @@ public class Main {
             if (mainChoice != 0) {
                 showSubMenu(mainChoice);
                 subChoice = requestIntInput(0, 8);
-                handleUserChoice(mainChoice, subChoice);
+
+                    handleUserChoice(mainChoice, subChoice);
+
+
+
             }
         } while (mainChoice != 0 && subChoice != 0);
     }
 
-    private static void handleUserChoice(int mainChoice, int subChoice) throws SQLException, ClassNotFoundException {
+    private static void handleUserChoice(int mainChoice, int subChoice) throws SQLException, ClassNotFoundException, ParseException {
         if (mainChoice == 1) {
             EmployeeService employeeService = new EmployeeService();
 
             if (subChoice == 1) {
 
-                try {
                     List<Employee> employees = employeeService.getAllEmployee();
                     employees.forEach(System.out::println);
-                } catch (SQLException | ClassNotFoundException ignores) {
-                    System.out.println("something went wrong with database");
-                    ignores.printStackTrace();
-                }
             }
             if (subChoice == 2) {
                 String fname = "";
@@ -56,44 +59,22 @@ public class Main {
                 fname = scan.nextLine();
                 System.out.println("please enter sir name of employee or leave it blank ");
                 lname = scan.nextLine();
-                try {
+
                     List<Employee> emp = employeeService.showDetails(fname, lname);
-                    emp.forEach(System.out::println);
+                    emp.forEach(System.out::print);
 
-
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    System.out.println("some thing went wrong");
-                    e.printStackTrace();
                 }
 
-            }
             if (subChoice == 3) {
                 Scanner scan = new Scanner(System.in);
 
                 System.out.println("Please enter the Id of employee to be deleted");
                 int id = scan.nextInt();
-                EmployeeService.getDelete(id);
+                //EmployeeService.getDelete(id);
 
             }
             if (subChoice == 4) {
-                Scanner scan = new Scanner(System.in);
-                System.out.println("Please enter the first name of the employee");
-                String first_name = scan.nextLine();
-                System.out.println("Please enter the sir_name ");
-                String sir_name = scan.nextLine();
-                System.out.println("please enter the telephone number");
-                String telephone_number = scan.nextLine();
-                System.out.println("Please enter the telephone number in case of emergency");
-                String telephone_number_ICE = scan.nextLine();
-                System.out.println("please enter birth date in (YYYY-MM-dd) format");
-                Date birth_date = Date.valueOf(scan.next());
-                java.sql.Date sqbirth_date = java.sql.Date.valueOf(String.valueOf(birth_date));
-                System.out.println("Please enter the salary");
-                double salary_per_month = scan.nextDouble();
-                EmployeeService.post(first_name, sir_name, telephone_number, telephone_number_ICE,
-                        birth_date, salary_per_month);
+              UserView.createEmployee(employeeService);
             }
             if (subChoice == 5) {
                 Scanner scan = new Scanner(System.in);
@@ -108,9 +89,7 @@ public class Main {
                 String telephone_number = scan.next();
                 System.out.println("Please enter the telephone number in case of emergency");
                 String telephone_number_ICE = scan.next();
-                System.out.println("please enter birth date in (YYYY-MM-dd) format");
-                Date birth_date = Date.valueOf(scan.next());
-                java.sql.Date sqbirth_date = java.sql.Date.valueOf(String.valueOf(birth_date));
+                 Date borth_date = DateUtility.getBirthdate();
                 System.out.println("Please enter the salary");
                 double salary_per_month = scan.nextDouble();
 
@@ -122,47 +101,50 @@ public class Main {
 
             }
             if (subChoice == 7) {
-                try {
+
                     List<Employee> employees = employeeService.getBirthday();
                     employees.forEach(System.out::println);
-                } catch (SQLException | ClassNotFoundException ignores) {
-                    System.out.println("something went wrong with database");
-                    ignores.printStackTrace();
-                }
-            }
-            if (subChoice == 8) {
-                try {
-                    List<Employee> employees = employeeService.getAge();
-                    employees.forEach(System.out::println);
-                } catch (SQLException | ClassNotFoundException ignores) {
-                    System.out.println("something went wrong with database");
-                    ignores.printStackTrace();
-                }
 
             }
+            if (subChoice == 8) {
+
+                    List<Employee> employees = employeeService.getAge();
+                    employees.forEach(System.out::println);
+            }
+
         }
 
             if (mainChoice == 2) {
                 DakPlus_ProjectService dps = new DakPlus_ProjectService();
                 if (subChoice == 1) {
-                    List<DakPlus_Project> dakplus = new ArrayList<>();
-                    try {
-                        dakplus = dps.incompleteProject();
+                    List<DakPlus_Project> dakplus = dps.incompleteProject();
                         dakplus.forEach(System.out::println);
-                    } catch (SQLException ignored) {
-                        System.out.println("some thing went wrong with data base");
                     }
+                if(subChoice ==2 ){
+                    List<DakPlus_Project> dakplus = dps.projectStartingtoday();
+                    dakplus.forEach(System.out::println);
+
+                }
+                if(subChoice==3){
+                    DakPlus_Project dpp = new DakPlus_Project();
+                    DakPlusView.userInput(dps);
+                    dps.addProject(dpp);
+
+
+
+
+
+                }
                 }
             }
 
-        }
 
 
         private static void showMenu () {
             System.out.println("0. Exit");
             System.out.println("1. employee");
             System.out.println("2. DakPlus_Project");
-            System.out.println("3. CompletedProjects");
+            System.out.println("3. Adding a new Projects");
         }
 
         private static void showSubMenu ( int choice){
@@ -181,6 +163,7 @@ public class Main {
             if (choice == 2) {
                 System.out.println("1. Running Projects which has not been completed");
                 System.out.println("2.Projects starting today");
+                System.out.println("3. Adding a new Project");
             }
         }
 

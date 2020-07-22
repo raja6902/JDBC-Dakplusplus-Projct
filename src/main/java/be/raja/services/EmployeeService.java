@@ -19,12 +19,13 @@ public class EmployeeService {
         return employeeDAO.showDetails(fname, lname);
     }
 
-    public static void getDelete(int id) {
+    public  void getDelete(int id) {
 
 
     }
 
-    public static void post(String fname, String lname, String phno, String phice, Date birth_date, double salary) {
+    public  void post(Employee employee) throws SQLException, ClassNotFoundException {
+        employeeDAO.post(employee);
 
     }
 

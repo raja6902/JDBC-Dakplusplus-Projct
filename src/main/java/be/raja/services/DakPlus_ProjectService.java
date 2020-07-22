@@ -5,6 +5,7 @@ import be.raja.model.DakPlus_Project;
 import be.raja.model.Employee;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 public class DakPlus_ProjectService {
@@ -13,4 +14,12 @@ public class DakPlus_ProjectService {
     public List<DakPlus_Project> incompleteProject() throws SQLException, ClassNotFoundException {
     return dakplusDAO.incompleteProject();
     }
+    public List<DakPlus_Project>  projectStartingtoday() throws SQLException, ClassNotFoundException {
+        return dakplusDAO.ProjectStartingToday();
+    }
+    public void addProject(DakPlus_Project dpp) throws SQLException, ClassNotFoundException {
+        dakplusDAO.addProject(dpp);
+
+    }
+
 }
