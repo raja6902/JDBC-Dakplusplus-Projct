@@ -19,8 +19,8 @@ public class EmployeeService {
         return employeeDAO.showDetails(fname, lname);
     }
 
-    public  void getDelete(int id) {
-
+    public void getDelete(Employee employee) throws SQLException, ClassNotFoundException {
+          employeeDAO.getDelete(employee);
 
     }
 
@@ -29,7 +29,8 @@ public class EmployeeService {
 
     }
 
-    public static void update(int id) throws SQLException, ClassNotFoundException {
+    public  void update(Employee employee) throws SQLException, ClassNotFoundException {
+        employeeDAO.updateEmployee(employee);
 
     }
 
@@ -41,7 +42,7 @@ public class EmployeeService {
         return employeeDAO.getBirthday();
     }
 
-    public List<Employee> getAge() throws SQLException, ClassNotFoundException {
-        return employeeDAO.getAge();
+    public List<Employee> getUnderAge() throws SQLException, ClassNotFoundException {
+        return employeeDAO.getUnderAge();
     }
     }

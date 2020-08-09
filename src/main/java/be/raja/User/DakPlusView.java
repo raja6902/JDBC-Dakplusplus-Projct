@@ -14,16 +14,13 @@ public class DakPlusView {
 
     public static void userInput(DakPlus_ProjectService dps) throws ParseException, SQLException, ClassNotFoundException {
         DakPlus_Project dp = new DakPlus_Project();
-        String description = DateUtility.StringInput();
-        dp.setDescription(description);
-        Date start_date = DateUtility.startDateInput();
-        dp.setStart_date(start_date);
-        double price = DateUtility.projectPrice();
-        dp.setPrice(price);
-        Date end_date = DateUtility.endDateInput();
-        dp.setEnd_date(end_date);
 
-            dps.addProject(dp);
+        dp.setStart_date(DateUtility.startDateInput());
+        dp.setDescription(DateUtility.StringInput());
+        dp.setPrice(DateUtility.projectPrice());
+        dp.setEnd_date(DateUtility.endDateInput());
+        dps.addProject(dp);
+
         }
 
         }

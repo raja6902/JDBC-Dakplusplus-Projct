@@ -1,7 +1,7 @@
 package be.raja.model;
 
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Employee {
     private int id;
@@ -9,7 +9,7 @@ public class Employee {
     private String sir_name;
     private String telephone_number;
     private String telephone_number_ICE;
-    private Date birth_date;
+    private LocalDate birth_date;
     private double salary_per_month;
 
     public Employee() {
@@ -55,11 +55,11 @@ public class Employee {
         this.telephone_number_ICE = telephone_number_ICE;
     }
 
-    public Date getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Date birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 

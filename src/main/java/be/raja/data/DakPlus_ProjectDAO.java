@@ -10,8 +10,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.sql.Date.valueOf;
-
 public class DakPlus_ProjectDAO {
     public List<DakPlus_Project> incompleteProject() throws SQLException, ClassNotFoundException {
         Connection conn = ConnectionFactory.getConnection();
@@ -26,27 +24,23 @@ public class DakPlus_ProjectDAO {
         ResultSet rs = statement.executeQuery("SELECT * FROM DakPlus_Project WHERE START_DATE BETWEEN (NOW()+1) AND (NOW()-1)");
         return parseDP_project(rs);
     }
-    public void addProject(DakPlus_Project dps) throws SQLException, ClassNotFoundException {
-        String str = "INSERT INTO DakPlus_Project(START_DATE,DESCRIPTION,PRICE,END_DATE) VALUES(?,?,?,?)";
-
+    public void addproject(DakPlus_Project dakp) throws SQLException, ClassNotFoundException {
         Connection conn = ConnectionFactory.getConnection();
-        PreparedStatement pst = conn.prepareStatement(str);
-
-
-        pst.setDate(1, dps.getStart_date());
-        pst.setString(2, dps.getDescription());
-        pst.setDouble(3,  dps.getPrice());
-        pst.setDate(4,   dps.getEnd_date());
-        int count =  pst.executeUpdate();
-           if(count>= 1)
-            System.out.println(count + " rows successfully added");
-            else {
-                System.out.println(" no data added");
-           }
-
+        PreparedStatement statement = conn.prepareStatement("INSERT INTO DakPlus_Project (START_DATE, DESCRIPTION, PRICE, END_DATE) VALUES (?,?,?,?)");
+        statement.setDate(1, dakp.getStart_date());
+        statement.setString(2, dakp.getDescription());
+        statement.setDouble(3, dakp.getPrice());
+        statement.setDate(4, dakp.getEnd_date());
+        int res = statement.executeUpdate();
+        if(res==0){
+            System.out.println("no record inserted");
         }
-
-
+        if(res>0){
+            System.out.println(res + "number of record added successfully ");
+        }
+        statement.close();
+        conn.close();
+    }
 
         private List<DakPlus_Project> parseDP_project (ResultSet rs) throws SQLException {
             List<DakPlus_Project> result = new ArrayList<>();

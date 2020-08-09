@@ -1,17 +1,13 @@
 package be.raja.User;
 
-import be.raja.data.ConnectionFactory;
-import be.raja.data.DakPlus_ProjectDAO;
+
 import be.raja.model.DakPlus_Project;
 import be.raja.model.Employee;
 import be.raja.services.DakPlus_ProjectService;
 import be.raja.services.EmployeeService;
-
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +15,6 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, ParseException {
-        Scanner scan = new Scanner(System.in);
 
         int mainChoice;
         int subChoice = -1;
@@ -66,34 +61,21 @@ public class Main {
                 }
 
             if (subChoice == 3) {
+                EmployeeService es = new EmployeeService();
+                Employee employee = new Employee();
                 Scanner scan = new Scanner(System.in);
 
                 System.out.println("Please enter the Id of employee to be deleted");
                 int id = scan.nextInt();
-                //EmployeeService.getDelete(id);
+                 employee.setId(id);
+                 es.getDelete(employee);
 
             }
             if (subChoice == 4) {
               UserView.createEmployee(employeeService);
             }
             if (subChoice == 5) {
-                Scanner scan = new Scanner(System.in);
-
-                System.out.println("Id of the employee");
-                int id = scan.nextInt();
-                System.out.println("Please enter the first name of the employee");
-                String first_name = scan.next();
-                System.out.println("Please enter the sir_name ");
-                String sir_name = scan.next();
-                System.out.println("please enter the telephone number");
-                String telephone_number = scan.next();
-                System.out.println("Please enter the telephone number in case of emergency");
-                String telephone_number_ICE = scan.next();
-                 Date borth_date = DateUtility.getBirthdate();
-                System.out.println("Please enter the salary");
-                double salary_per_month = scan.nextDouble();
-
-                EmployeeService.update(id);
+                 UserView.updateEmployee(employeeService);
             }
             if (subChoice == 6) {
                 List<Employee> employees = employeeService.getWrongPhoneNumber();
@@ -108,7 +90,7 @@ public class Main {
             }
             if (subChoice == 8) {
 
-                    List<Employee> employees = employeeService.getAge();
+                    List<Employee> employees = employeeService.getUnderAge();
                     employees.forEach(System.out::println);
             }
 
@@ -128,7 +110,7 @@ public class Main {
                 if(subChoice==3){
                     DakPlus_Project dpp = new DakPlus_Project();
                     DakPlusView.userInput(dps);
-                    dps.addProject(dpp);
+
 
 
 
@@ -155,9 +137,9 @@ public class Main {
                 System.out.println("3. deleting employee from list ");
                 System.out.println("4. Adding new employee");
                 System.out.println("5. Updating the Employee list");
-                System.out.println("6 Wrong phone number listed");
+                System.out.println("6 List of Wrong mobile phone number i.e other than prefix 04 and less than 8 digits");
                 System.out.println("7. employee's birthday with in  next 7 days");
-                System.out.println("8. Showing Employee's Age");
+                System.out.println("8. List of Employee's who are under 18 years old");
 
             }
             if (choice == 2) {

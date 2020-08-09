@@ -17,9 +17,9 @@ public class DakPlus_ProjectService {
     public List<DakPlus_Project>  projectStartingtoday() throws SQLException, ClassNotFoundException {
         return dakplusDAO.ProjectStartingToday();
     }
-    public void addProject(DakPlus_Project dpp) throws SQLException, ClassNotFoundException {
-        dakplusDAO.addProject(dpp);
+    public void addProject(DakPlus_Project dakp) throws SQLException, ClassNotFoundException {
+        dakplusDAO.addproject(dakp);
+    }
 
     }
 
-}
