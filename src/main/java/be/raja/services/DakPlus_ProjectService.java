@@ -12,14 +12,16 @@ public class DakPlus_ProjectService {
     private DakPlus_ProjectDAO dakplusDAO = new DakPlus_ProjectDAO();
 
     public List<DakPlus_Project> incompleteProject() throws SQLException, ClassNotFoundException {
-    return dakplusDAO.incompleteProject();
+        return dakplusDAO.incompleteProject();
     }
-    public List<DakPlus_Project>  projectStartingtoday() throws SQLException, ClassNotFoundException {
+
+    public List<DakPlus_Project> projectStartingtoday() throws SQLException, ClassNotFoundException {
         return dakplusDAO.ProjectStartingToday();
     }
+
     public void addProject(DakPlus_Project dakp) throws SQLException, ClassNotFoundException {
         dakplusDAO.addproject(dakp);
     }
 
-    }
+}
 

@@ -20,16 +20,16 @@ public class EmployeeService {
     }
 
     public void getDelete(Employee employee) throws SQLException, ClassNotFoundException {
-          employeeDAO.getDelete(employee);
+        employeeDAO.getDelete(employee);
 
     }
 
-    public  void post(Employee employee) throws SQLException, ClassNotFoundException {
+    public void post(Employee employee) throws SQLException, ClassNotFoundException {
         employeeDAO.post(employee);
 
     }
 
-    public  void update(Employee employee) throws SQLException, ClassNotFoundException {
+    public void update(Employee employee) throws SQLException, ClassNotFoundException {
         employeeDAO.updateEmployee(employee);
 
     }
@@ -45,4 +45,4 @@ public class EmployeeService {
     public List<Employee> getUnderAge() throws SQLException, ClassNotFoundException {
         return employeeDAO.getUnderAge();
     }
-    }
+}

@@ -1,16 +1,14 @@
 package be.raja.data;
 
-import be.raja.User.UserView;
-import be.raja.model.Employee;
-import be.raja.services.EmployeeService;
 
+import be.raja.model.Employee;
 import java.sql.*;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static be.raja.User.UserView.dateCon;
+
 
 
 public class EmployeeDAO {
@@ -27,8 +25,7 @@ public class EmployeeDAO {
     public void post(Employee employee) throws SQLException, ClassNotFoundException {
 
         Connection conn = ConnectionFactory.getConnection();
-        PreparedStatement statement = conn.prepareStatement(
-                "INSERT INTO employee(first_name, sir_name, telephone_number, telephone_number_ICE, birth_date, salary_per_month ) VALUES ( ?, ?, ?, ?, ?, ?)");
+        PreparedStatement statement = conn.prepareStatement("INSERT INTO employee(first_name, sir_name, telephone_number, telephone_number_ICE, birth_date, salary_per_month ) VALUES ( ?, ?, ?, ?, ?, ?)");
         statement.setString(1, employee.getFirst_name());
         statement.setString(2, employee.getSir_name());
         statement.setString(3, employee.getTelephone_number());
@@ -62,10 +59,10 @@ public class EmployeeDAO {
 
     }
 
-    public List<Employee> showDetails(String fname, String lname) throws SQLException, ClassNotFoundException {
+    public List<Employee> showDetails(String fname, String lname) throws SQLException {
 
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
+        Connection conn;
+        PreparedStatement preparedStatement;
         ResultSet rs = null;
         try {
             conn = ConnectionFactory.getConnection();
@@ -80,9 +77,11 @@ public class EmployeeDAO {
             e.printStackTrace();
 
         }
+        assert rs != null;
         return parseEmployee(rs);
 
     }
+
 
     public List<Employee> getWrongPhoneNumber() throws SQLException, ClassNotFoundException {
         String string = "SELECT *  FROM employee WHERE telephone_number  NOT LIKE '04%' OR LENGTH(telephone_number) < 8 ";
@@ -95,8 +94,7 @@ public class EmployeeDAO {
 
     public List<Employee> getUnderAge() throws SQLException, ClassNotFoundException {
 
-        List<Employee> result = new ArrayList<>();
-        Employee emp = new Employee();
+
         String string = "SELECT * FROM employee WHERE (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(birth_date,'%Y'))< 18";
 
         Connection conn = ConnectionFactory.getConnection();
@@ -142,7 +140,7 @@ public class EmployeeDAO {
         conn.close();
     }
 
-    private List<Employee> parseEmployee(ResultSet rs) throws SQLException {
+    private static List<Employee> parseEmployee(ResultSet rs) throws SQLException {
         List<Employee> result = new ArrayList<>();
         while (rs.next()) {
             Employee emp = new Employee();

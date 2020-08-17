@@ -1,14 +1,12 @@
 package be.raja.User;
 
-import be.raja.data.DakPlus_ProjectDAO;
+
 import be.raja.model.DakPlus_Project;
 import be.raja.services.DakPlus_ProjectService;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
+
 
 public class DakPlusView {
 
@@ -21,9 +19,9 @@ public class DakPlusView {
         dp.setEnd_date(DateUtility.endDateInput());
         dps.addProject(dp);
 
-        }
+    }
 
-        }
+}
 
 
 

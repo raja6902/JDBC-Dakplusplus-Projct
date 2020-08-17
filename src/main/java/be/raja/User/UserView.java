@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 
 
-public class UserView{
+public class UserView {
 
     public static void createEmployee(EmployeeService employeeService) throws SQLException, ClassNotFoundException, ParseException {
         Employee employee = new Employee();
@@ -22,6 +22,7 @@ public class UserView{
         employeeService.post(employee);
 
     }
+
     public static void updateEmployee(EmployeeService es) throws SQLException, ParseException, ClassNotFoundException {
 
         Employee employee = new Employee();
@@ -38,9 +39,9 @@ public class UserView{
 
     }
 
-    public static Date dateCon(){
-       LocalDate birth_date = null;
-      return Date.valueOf(birth_date);
+    public static Date dateCon() {
+        LocalDate birth_date = null;
+        return Date.valueOf(birth_date);
 
     }
 
