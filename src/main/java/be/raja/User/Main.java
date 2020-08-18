@@ -144,7 +144,7 @@ public class Main {
                 Scanner scan = new Scanner(System.in);
 
 
-                System.out.println("Please enter the EmplooyeeId to be deleted from the table ");
+                System.out.println("Please enter the EmployeeId to be deleted from the table ");
                 int EmployeeId = scan.nextInt();
                 wd.setEmployeeId(EmployeeId);
                 System.out.println("Please enter the ProjectId to be deleted");
