@@ -39,10 +39,6 @@ public class UserView {
 
     }
 
-    public static Date dateCon() {
-        LocalDate birth_date = null;
-        return Date.valueOf(birth_date);
 
     }
 
-}

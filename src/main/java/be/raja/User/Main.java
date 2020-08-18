@@ -100,7 +100,7 @@ public class Main {
         if (mainChoice == 2) {
             DakPlus_ProjectService dps = new DakPlus_ProjectService();
             if (subChoice == 1) {
-                List<DakPlus_Project> dakplus = dps.incompleteProject();
+                List<DakPlus_Project> dakplus = dps.incompleteProject();  // List of ongoing projects.
                 dakplus.forEach(System.out::println);
             }
             if (subChoice == 2) {
@@ -186,7 +186,7 @@ public class Main {
 
         }
         if (choice == 2) {
-            System.out.println("1. Running Projects which has not been completed");
+            System.out.println("1. Running Projects which has not been completed or ongoing projects");
             System.out.println("2.Projects starting today");
             System.out.println("3. Adding a new Project");
         }
