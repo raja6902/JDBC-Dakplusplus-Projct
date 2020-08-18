@@ -220,9 +220,6 @@ public class Main {
     }
 
 
-    private static void printResult(List<String> result) {
-        result.forEach(System.out::println);
-    }
 }
 
 
