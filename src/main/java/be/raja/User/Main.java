@@ -24,10 +24,10 @@ public class Main {
 
         do {
             showMenu();
-            mainChoice = requestIntInput(0, 3);
+            mainChoice = requestIntInput(3);
             if (mainChoice != 0) {
                 showSubMenu(mainChoice);
-                subChoice = requestIntInput(0, 8);
+                subChoice = requestIntInput(11);
 
                 handleUserChoice(mainChoice, subChoice);
 
@@ -46,8 +46,8 @@ public class Main {
                 employees.forEach(System.out::println);
             }
             if (subChoice == 2) {
-                String fname ;
-                String lname ;
+                String fname;
+                String lname;
                 Scanner scan = new Scanner(System.in);
 
                 System.out.println("Please enter first name of employee or leave it blank");
@@ -110,9 +110,9 @@ public class Main {
             }
             if (subChoice == 3) {
                 DakPlusView.userInput(dps);
-
-
             }
+
+
         }
         if (mainChoice == 3) {
             WorkDoneService wds = new WorkDoneService();
@@ -161,7 +161,60 @@ public class Main {
 
                 WorkDoneView.updateWorkD(wds);
             }
+            if (subChoice == 7) {
+                WORKDONE wd = new WORKDONE();
+                Scanner scan = new Scanner(System.in);
+
+                System.out.println("Please print the ProjectId");
+                int ProjectId = scan.nextInt();
+                wd.setProjectId(ProjectId);
+
+                List<Integer> integerList = wds.employeeIds(wd);
+                integerList.forEach(System.out::println);
+
+            }
+            if (subChoice == 8) {
+                WORKDONE wd = new WORKDONE();
+                Scanner scan = new Scanner(System.in);
+                System.out.println("Please enter the EmployeeId");
+                int EmployeeId = scan.nextInt();
+                wd.setEmployeeId(EmployeeId);
+
+                System.out.println("Please print the ProjectId");
+                int ProjectId = scan.nextInt();
+                wd.setProjectId(ProjectId);
+                double hoursworked = wds.getHoursPerProjByEmpl(EmployeeId, ProjectId);
+                System.out.println(hoursworked);
+
+            }
+            if (subChoice == 9) {
+                WORKDONE wd = new WORKDONE();
+                Scanner scan = new Scanner(System.in);
+
+                System.out.println("Please enter the EmployeeId to get hourly wage");
+                int EmployeeId = scan.nextInt();
+                wd.setEmployeeId(EmployeeId);
+                double hourlywage = wds.getSalaryPerHour(EmployeeId);
+                System.out.println(hourlywage);
+            }
+            if (subChoice == 10) {
+                DakPlus_ProjectService dps = new DakPlus_ProjectService();
+
+                WORKDONE wd = new WORKDONE();
+                Scanner scan = new Scanner(System.in);
+
+                System.out.println("Please print the ProjectId");
+                int ProjectId = scan.nextInt();
+                wd.setProjectId(ProjectId);
+                dps.getPrice(ProjectId);
+                wds.employeeIds(wd);
+                double result = wds.calculateProfit(ProjectId, wds.employeeIds(wd));
+                System.out.println("The total Profit of a Project is : "+result);
+            }
+
+
         }
+
     }
 
 
@@ -197,11 +250,16 @@ public class Main {
             System.out.println("4.  deleting entry from WORKDONE table");
             System.out.println("5.   Adding a new row in a table");
             System.out.println("6.    Updating a existing record");
+            System.out.println("7.    List<Integer> of EmployeeIds worked in a project");
+            System.out.println("8.    Number of Hours worked by a employee in a project");
+            System.out.println("9.    Calculating hourly wage of a asked employee");
+            System.out.println("10,    calculating profit of project");
+
         }
 
     }
 
-    private static int requestIntInput(int lower, int upper) {
+    private static int requestIntInput(int upper) {
         Scanner scanner = new Scanner(System.in);
         int input;
         do {
@@ -212,10 +270,10 @@ public class Main {
                 input = -1;
             }
             scanner.nextLine();
-            if (input < lower || input > upper)
+            if (input < 0 || input > upper)
                 System.out.println("this is not valid number");
         }
-        while (input < lower || input > upper);
+        while (input < 0 || input > upper);
         return input;
     }
 

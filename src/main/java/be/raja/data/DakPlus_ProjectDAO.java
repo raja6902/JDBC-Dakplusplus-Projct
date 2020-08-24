@@ -42,6 +42,22 @@ public class DakPlus_ProjectDAO {
         conn.close();
 
     }
+    public double getPrice(int ProjectId) throws SQLException, ClassNotFoundException {
+        double price = 0;
+        DakPlus_Project dp = new DakPlus_Project();
+        String str = "SELECT PRICE FROM DakPlus_Project WHERE Id = ?";
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement preparedStatement = conn.prepareStatement(str);
+        preparedStatement.setInt(1, ProjectId);
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        if (rs.next()) {
+            price = rs.getDouble(1);
+        }
+        return price;
+    }
+
 
     private static List<DakPlus_Project> parseDP_project(ResultSet rs) throws SQLException {
         List<DakPlus_Project> result = new ArrayList<>();

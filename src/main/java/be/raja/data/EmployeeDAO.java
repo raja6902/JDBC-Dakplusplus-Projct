@@ -140,6 +140,8 @@ public class EmployeeDAO {
         conn.close();
     }
 
+
+
     private static List<Employee> parseEmployee(ResultSet rs) throws SQLException {
         List<Employee> result = new ArrayList<>();
         while (rs.next()) {

@@ -22,6 +22,8 @@ public class DakPlus_ProjectService {
     public void addProject(DakPlus_Project dakp) throws SQLException, ClassNotFoundException {
         dakplusDAO.addproject(dakp);
     }
-
+    public double getPrice(int ProjectId) throws SQLException, ClassNotFoundException {
+        return dakplusDAO.getPrice(ProjectId);
+    }
 }
 

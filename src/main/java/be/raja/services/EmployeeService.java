@@ -2,8 +2,6 @@ package be.raja.services;
 
 import be.raja.data.EmployeeDAO;
 import be.raja.model.Employee;
-
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
